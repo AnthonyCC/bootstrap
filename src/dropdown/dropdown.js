@@ -38,13 +38,13 @@ angular.module('ui.bootstrap.dropdown', ['ui.bootstrap.position'])
     if (evt && evt.which === 3) { return; }
 
     var toggleElement = openScope.getToggleElement();
-    if (evt && toggleElement && toggleElement[0].contains(evt.target)) {
+    if (evt && toggleElement && toggleElement[0].contains && toggleElement[0].contains(evt.target)) {
       return;
     }
 
     var dropdownElement = openScope.getDropdownElement();
     if (evt && openScope.getAutoClose() === 'outsideClick' &&
-      dropdownElement && dropdownElement[0].contains(evt.target)) {
+      dropdownElement && dropdownElement[0].contains && dropdownElement[0].contains(evt.target)) {
       return;
     }
 
@@ -186,7 +186,8 @@ angular.module('ui.bootstrap.dropdown', ['ui.bootstrap.position'])
   };
 
   scope.focusToggleElement = function() {
-    if (self.toggleElement) {
+	// Add a null check to .focus here. Some elements, such as svg in IE, may not have focus  
+    if (self.toggleElement && self.toggleElement[0].focus) {
       self.toggleElement[0].focus();
     }
   };
